@@ -28,7 +28,7 @@ const server = node_http_1.default.createServer((req, res) => __awaiter(void 0, 
         if (reqUrl.startsWith("/api/auth/login") && reqMethod == config_1.METHODS_ENUM.CREATE)
             return auth_controller_1.default.login(req, res);
         if (yield (0, checkToken_1.checkToken)(req, res)) {
-            if (reqUrl.startsWith("/api/todo/") && reqMethod == config_1.METHODS_ENUM.DELETE)
+            if (reqUrl.startsWith("/api/todo/delete") && reqMethod == config_1.METHODS_ENUM.DELETE)
                 todo_controller_1.default.deleteTodo(req, res);
             if (reqUrl.startsWith("/api/todo/") && reqMethod == config_1.METHODS_ENUM.READ)
                 return todo_controller_1.default.getTodo(req, res);
@@ -36,7 +36,7 @@ const server = node_http_1.default.createServer((req, res) => __awaiter(void 0, 
                 return todo_controller_1.default.getTodos(req, res);
             if (reqUrl.startsWith("/api/todo/create") && reqMethod == config_1.METHODS_ENUM.CREATE)
                 todo_controller_1.default.createTodo(req, res);
-            if (reqUrl.startsWith("/api/update/") && reqMethod == config_1.METHODS_ENUM.UPDATE)
+            if (reqUrl.startsWith("/api/todo/update/") && reqMethod == config_1.METHODS_ENUM.UPDATE)
                 todo_controller_1.default.UpdateTodo(req, res);
         }
     }

@@ -10,14 +10,14 @@ const registerValidator = (user) => {
     if (!first_name)
         throw new error_1.ClientError("First name is required !", 400);
     if (!last_name)
-        throw new error_1.ClientError("First name is required !", 400);
+        throw new error_1.ClientError("Last name is required !", 400);
     if (!email)
-        throw new error_1.ClientError("First name is required !", 400);
+        throw new error_1.ClientError("Email is required !", 400);
     if (!password)
-        throw new error_1.ClientError("First name is required !", 400);
+        throw new error_1.ClientError("Password name is required !", 400);
     if (!(emailRegex.test(email)))
         throw new error_1.ClientError("Email is invalid !", 400);
-    if (!(password.length > 5 && password.length < 13))
+    if (!(password.length >= 5 && password.length <= 13))
         throw new error_1.ClientError("Password is invalid !", 400);
     return true;
 };
@@ -25,12 +25,12 @@ exports.registerValidator = registerValidator;
 const loginValidator = (user) => {
     const { email, password } = user;
     if (!email)
-        throw new error_1.ClientError("First name is required !", 400);
+        throw new error_1.ClientError("Email is required !", 400);
     if (!password)
-        throw new error_1.ClientError("First name is required !", 400);
+        throw new error_1.ClientError("Password name is required !", 400);
     if (!(emailRegex.test(email)))
         throw new error_1.ClientError("Email is invalid !", 400);
-    if (!(password.length > 5 && password.length < 12))
+    if (!(password.length >= 5 && password.length <= 12))
         throw new error_1.ClientError("Password is invalid !", 400);
     return true;
 };
