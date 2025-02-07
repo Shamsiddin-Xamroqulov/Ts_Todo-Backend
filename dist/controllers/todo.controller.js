@@ -127,37 +127,28 @@ class userTodos extends controller_dto_1.TodoControllertype {
             }
         });
         this.deleteTodo = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                const todos = yield ((0, readFile_1.readFile)("todos.json"));
-                const todo_id = Number(req.url.trim().split("/").at(-1));
-                if (!todo_id)
-                    throw new error_1.ClientError("NOT FOUND", 404);
-                const find_index_todo = todos.findIndex((t) => t.id == todo_id);
-                if (find_index_todo == -1)
-                    throw new error_1.ClientError("NOT FOUND", 404);
-                const token = req.headers.token;
-                const verify_token = (0, jsonwebtoken_1.verify)(token, process.env.TOKEN_KEY);
-                const todo = todos[find_index_todo];
-                if (todo.user_id != verify_token.user_id)
-                    throw new error_1.ClientError("Todo is not deleted", 400);
-                todos.splice(find_index_todo, 1);
-                const delete_todo = yield (0, writeFile_1.writeFile)("todos.json", todos);
-                if (!delete_todo)
-                    throw new error_1.ServerError("Todo is not deleted");
-                const result = {
-                    message: "Todo is deleted",
-                    status: 200,
-                };
-                res.statusCode = 200;
-                res.end(JSON.stringify(result));
-            }
-            catch (error) {
-                let err = {
-                    message: error.message,
-                    status: error.status,
-                };
-                (0, error_1.globalError)(res, err);
-            }
+            const todos = yield ((0, readFile_1.readFile)("todos.json"));
+            const todo_id = Number(req.url.trim().split("/").at(-1));
+            if (!todo_id)
+                throw new error_1.ClientError("NOT FOUND", 404);
+            const find_index_todo = todos.findIndex((t) => t.id == todo_id);
+            if (find_index_todo == -1)
+                throw new error_1.ClientError("NOT FOUND", 404);
+            const token = req.headers.token;
+            const verify_token = (0, jsonwebtoken_1.verify)(token, process.env.TOKEN_KEY);
+            const todo = todos[find_index_todo];
+            if (todo.user_id != verify_token.user_id)
+                throw new error_1.ClientError("Todo is not deleted", 400);
+            todos.splice(find_index_todo, 1);
+            const delete_todo = yield (0, writeFile_1.writeFile)("todos.json", todos);
+            if (!delete_todo)
+                throw new error_1.ServerError("Todo is not deleted");
+            const result = {
+                message: "Todo is deleted",
+                status: 200,
+            };
+            res.statusCode = 200;
+            res.end(JSON.stringify(result));
         });
         this.createTodo = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {

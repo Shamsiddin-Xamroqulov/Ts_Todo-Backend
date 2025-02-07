@@ -21,6 +21,7 @@ class userTodos extends TodoControllertype {
     super();
     this.getTodo = async (req:IncomingMessage, res:ServerResponse<IncomingMessage>) => {
         try {
+
             let newTodo:string = "";
             req.on("data", (chunk) => {
                 newTodo += chunk;
@@ -112,32 +113,24 @@ class userTodos extends TodoControllertype {
         }
     };
     this.deleteTodo = async (req:IncomingMessage, res:ServerResponse<IncomingMessage>) => {
-        try {
-            const todos: Todos[] = await (readFile("todos.json")) as Todos[];
-            const todo_id: number = Number((req.url as string).trim().split("/").at(-1));
-            if (!todo_id) throw new ClientError("NOT FOUND", 404);
-            const find_index_todo: number = todos.findIndex((t: Todos) => t.id == todo_id);
-            if (find_index_todo == -1) throw new ClientError("NOT FOUND", 404);
-            const token: string = req.headers.token as string;
-            const verify_token: TokenBody = verify(token, process.env.TOKEN_KEY as string) as TokenBody;
-            const todo: Todos = todos[find_index_todo];
-            if (todo.user_id != verify_token.user_id) throw new ClientError("Todo is not deleted", 400);
-            todos.splice(find_index_todo, 1);
-            const delete_todo: boolean | void = await writeFile("todos.json", todos);
-            if (!delete_todo) throw new ServerError("Todo is not deleted");
-            const result: todoResultType = {
-                message: "Todo is deleted",
-                status: 200,
-            }
-            res.statusCode = 200;
-            res.end(JSON.stringify(result));
-        }catch (error) {
-            let err: Error = {
-                message: (error as Error).message,
-                status: (error as Error).status,
-            };
-            globalError(res, err);
+        const todos: Todos[] = await (readFile("todos.json")) as Todos[];
+        const todo_id: number = Number((req.url as string).trim().split("/").at(-1));
+        if (!todo_id) throw new ClientError("NOT FOUND", 404);
+        const find_index_todo: number = todos.findIndex((t: Todos) => t.id == todo_id);
+        if (find_index_todo == -1) throw new ClientError("NOT FOUND", 404);
+        const token: string = req.headers.token as string;
+        const verify_token: TokenBody = verify(token, process.env.TOKEN_KEY as string) as TokenBody;
+        const todo: Todos = todos[find_index_todo];
+        if (todo.user_id != verify_token.user_id) throw new ClientError("Todo is not deleted", 400);
+        todos.splice(find_index_todo, 1);
+        const delete_todo: boolean | void = await writeFile("todos.json", todos);
+        if (!delete_todo) throw new ServerError("Todo is not deleted");
+        const result: todoResultType = {
+            message: "Todo is deleted",
+            status: 200,
         }
+        res.statusCode = 200;
+        res.end(JSON.stringify(result));
     }
     this.createTodo = async (req:IncomingMessage, res:ServerResponse<IncomingMessage>) => {
         try {

@@ -4,7 +4,7 @@ exports.validatorTodo = exports.loginValidator = exports.registerValidator = voi
 const joi_1 = require("../lib/joi/joi");
 const error_1 = require("./error");
 // import Joi, {ObjectSchema} from "joi"
-let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+let emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 const registerValidator = (user) => {
     const { first_name, last_name, email, password } = user;
     if (!first_name)

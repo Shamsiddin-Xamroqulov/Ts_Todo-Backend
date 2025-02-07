@@ -5,5 +5,68 @@
         "last_name": "Norkulov",
         "email": "ogabek@gmail.com",
         "password": "ogabek123"
+    },
+    {
+        "id": 2,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox123@gmail.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 3,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox1234@gail.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 4,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox1234@gmal.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 5,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox1234@gm.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 6,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox1@gm.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 7,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox001@gmail.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 8,
+        "first_name": "shoxjaxon",
+        "last_name": "Musinkulov",
+        "email": "shox01@gmail.com",
+        "password": "12345shox"
+    },
+    {
+        "id": 9,
+        "first_name": "Shamsiddin",
+        "last_name": "Xamroqulov",
+        "email": "shamsiddin7@gmail.com",
+        "password": "sh11022007"
+    },
+    {
+        "id": 10,
+        "first_name": "coco",
+        "last_name": "cole",
+        "email": "cocoCola@gmail.com",
+        "password": "cocoCola123"
     }
 ]

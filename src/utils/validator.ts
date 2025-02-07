@@ -3,7 +3,7 @@ import { Todos, User } from "../types";
 import { ClientError } from "./error";
 // import Joi, {ObjectSchema} from "joi"
 
-let emailRegex:RegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+let emailRegex:RegExp = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
 export const registerValidator = (user:User):boolean | void => {
     const {first_name, last_name, email, password} = user;
