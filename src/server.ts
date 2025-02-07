@@ -7,8 +7,8 @@ import userTodos from "./controllers/todo.controller";
 const { port } = serverConfiguration;
 
 const reqLimit = new RateLimiterMemory({
-    points: 2,
-    duration: 60
+    points: 1,
+    duration: 6
 })
 
 const server = http.createServer(async (req, res) => {
@@ -19,6 +19,7 @@ const server = http.createServer(async (req, res) => {
     try {
         await reqLimit.consume(userId);
     } catch {
+        res.writeHead(429, {"content-type": "application/json"})
         return res.end(JSON.stringify({ message: "Too many requests", status: 429 }));
     }
     if(reqUrl.startsWith("/api")){
