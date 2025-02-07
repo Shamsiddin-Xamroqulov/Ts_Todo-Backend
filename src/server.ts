@@ -1,13 +1,26 @@
 import http from "node:http";
+import {RateLimiterMemory} from "rate-limiter-flexible";
 import { METHODS_ENUM, serverConfiguration } from "./config";
 import userController from "./controllers/auth.controller";
 import { checkToken } from "./models/checkToken";
 import userTodos from "./controllers/todo.controller";
 const { port } = serverConfiguration;
+
+const reqLimit = new RateLimiterMemory({
+    points: 2,
+    duration: 60
+})
+
 const server = http.createServer(async (req, res) => {
     let reqUrl:string = (req.url as string).trim().toLocaleLowerCase();
     let reqMethod:string = (req.method as string).trim().toUpperCase();
     res.setHeader("Content-type", "application/json");
+    let userId = req.headers.authorization || req.socket.remoteAddress || "anonymous"; 
+    try {
+        await reqLimit.consume(userId);
+    } catch {
+        return res.end(JSON.stringify({ message: "Too many requests", status: 429 }));
+    }
     if(reqUrl.startsWith("/api")){
         if(reqUrl.startsWith("/api/auth/register") && reqMethod == METHODS_ENUM.CREATE) return userController.register(req, res);
         if(reqUrl.startsWith("/api/auth/login") && reqMethod == METHODS_ENUM.CREATE) return userController.login(req, res);

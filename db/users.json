@@ -68,5 +68,19 @@
         "last_name": "cole",
         "email": "cocoCola@gmail.com",
         "password": "cocoCola123"
+    },
+    {
+        "id": 11,
+        "first_name": "Munisa",
+        "last_name": "Xamroqulova",
+        "email": "munisa2@gmail.com",
+        "password": "sh11022007"
+    },
+    {
+        "id": 12,
+        "first_name": "Shamsiddin",
+        "last_name": "Xamorqulov",
+        "email": "lolo@gmail.com",
+        "password": "shamsiddin07"
     }
 ]
